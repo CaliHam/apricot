@@ -19,20 +19,23 @@ const App = () => {
 
   useEffect(() => {
     if (!loading && flag) {
-      let currentIndex = -1;
+      let currentIndex = 0;
 
       const intervalId = setInterval(() => {
-        setDisplayedFlag((prev) => prev + flag[currentIndex]);
+        let currentChar = flag[currentIndex]
+        !currentIndex
+          ? setDisplayedFlag(currentChar)
+          : setDisplayedFlag((prev) => prev + currentChar);
         currentIndex++;
 
-        if (currentIndex === flag.length -1) {
+        if (currentIndex === flag.length) {
           clearInterval(intervalId);
         }
       }, 500); 
 
       return () => clearInterval(intervalId);
     }
-  }, [loading, flag]);
+  }, [flag]);
 
   return (
     <div>
